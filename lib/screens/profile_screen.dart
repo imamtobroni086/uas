@@ -15,8 +15,9 @@ class ProfileScreen extends StatelessWidget {
             const Center(
               child: CircleAvatar(
                 radius: 50,
-                backgroundColor: Colors.red,
-                child: Icon(Icons.person, size: 50, color: Colors.white),
+                backgroundImage: NetworkImage(
+                  'https://static.wikia.nocookie.net/mobile-legends/images/5/5f/Layla.png',
+                ),
               ),
             ),
             const SizedBox(height: 16),
@@ -44,10 +45,7 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 32),
             ElevatedButton(
               onPressed: () {
-                // Edit profile
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(const SnackBar(content: Text('Edit profil')));
+                Navigator.pushNamed(context, '/edit_profile');
               },
               child: const Text('Edit Profil'),
             ),

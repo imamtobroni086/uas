@@ -24,48 +24,43 @@ class HomeScreen extends StatelessWidget {
           children: [
             // Greeting
             const Text(
-              'Selamat pagi, User!',
+              'Ahlan Wa Sahlan, Ronie!',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
             // Banner
-            Container(
-              height: 100,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.red,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: const Center(
-                child: Text(
-                  'Banner Informasi',
-                  style: TextStyle(color: Colors.white, fontSize: 18),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/announcements');
+              },
+              child: Container(
+                height: 100,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Center(
+                  child: Text(
+                    'Banner Informasi',
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
                 ),
               ),
             ),
             const SizedBox(height: 16),
-            // Shortcut Menu
+            // Quick Stats
             const Text(
-              'Menu Cepat',
+              'Ringkasan',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _buildShortcutButton(context, Icons.class_, 'Kelas', '/main'),
-                _buildShortcutButton(
-                  context,
-                  Icons.assignment,
-                  'Tugas',
-                  '/main',
-                ),
-                _buildShortcutButton(
-                  context,
-                  Icons.announcement,
-                  'Pengumuman',
-                  '/announcements',
-                ),
+                _buildStatCard(Icons.class_, '2', 'Kelas'),
+                _buildStatCard(Icons.assignment, '3', 'Tugas Aktif'),
+                _buildStatCard(Icons.announcement, '1', 'Pengumuman Baru'),
               ],
             ),
             const SizedBox(height: 16),
@@ -95,26 +90,32 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildShortcutButton(
-    BuildContext context,
-    IconData icon,
-    String label,
-    String route,
-  ) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, route);
-      },
-      child: Column(
-        children: [
-          CircleAvatar(
-            radius: 30,
-            backgroundColor: Colors.red,
-            child: Icon(icon, color: Colors.white),
+  Widget _buildStatCard(IconData icon, String value, String label) {
+    return Expanded(
+      child: Card(
+        elevation: 4,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Icon(icon, size: 32, color: Colors.red),
+              const SizedBox(height: 8),
+              Text(
+                value,
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                label,
+                style: const TextStyle(fontSize: 12, color: Colors.grey),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
-          const SizedBox(height: 4),
-          Text(label),
-        ],
+        ),
       ),
     );
   }

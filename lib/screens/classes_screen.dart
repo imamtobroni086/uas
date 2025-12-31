@@ -1,7 +1,48 @@
 import 'package:flutter/material.dart';
 
-class ClassesScreen extends StatelessWidget {
+class ClassesScreen extends StatefulWidget {
   const ClassesScreen({super.key});
+
+  @override
+  State<ClassesScreen> createState() => _ClassesScreenState();
+}
+
+class _ClassesScreenState extends State<ClassesScreen> {
+  final _codeController = TextEditingController();
+
+  void _joinClass() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Bergabung ke Kelas'),
+        content: TextField(
+          controller: _codeController,
+          decoration: const InputDecoration(labelText: 'Kode Kelas'),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Batal'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              // Simulate joining
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    'Berhasil bergabung ke kelas dengan kode: ${_codeController.text}',
+                  ),
+                ),
+              );
+              _codeController.clear();
+            },
+            child: const Text('Bergabung'),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +62,10 @@ class ClassesScreen extends StatelessWidget {
           _buildClassCard(context, 'Fisika', 'Prof. Budi', 0.9, 'Aktif'),
           _buildClassCard(context, 'Kimia', 'Dr. Siti', 0.3, 'Aktif'),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _joinClass,
+        child: const Icon(Icons.add),
       ),
     );
   }

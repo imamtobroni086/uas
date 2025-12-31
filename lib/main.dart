@@ -7,6 +7,8 @@ import 'screens/announcements_screen.dart';
 import 'screens/class_details_screen.dart';
 import 'screens/assignment_details_screen.dart';
 import 'screens/learning_materials_screen.dart';
+import 'screens/reset_password_screen.dart';
+import 'screens/edit_profile_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,6 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'LMS App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.red,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
@@ -29,6 +32,8 @@ class MyApp extends StatelessWidget {
         '/splash': (context) => const SplashScreen(),
         '/login': (context) => const LoginScreen(),
         '/register': (context) => const RegisterScreen(),
+        '/reset_password': (context) => const ResetPasswordScreen(),
+        '/edit_profile': (context) => const EditProfileScreen(),
         '/main': (context) => const MainScreen(),
         '/announcements': (context) => const AnnouncementsScreen(),
         '/class_details': (context) => const ClassDetailsScreen(),

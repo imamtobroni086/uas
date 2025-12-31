@@ -39,11 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             TextButton(
               onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Fitur reset password akan segera hadir'),
-                  ),
-                );
+                Navigator.pushNamed(context, '/reset_password');
               },
               child: const Text('Lupa Password'),
             ),
